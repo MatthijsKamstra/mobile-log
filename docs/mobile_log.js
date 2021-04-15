@@ -2,9 +2,42 @@
 (function ($global) { "use strict";
 class Main {
 	constructor() {
+		this.file = ".red {\n  padding: 10px;\n  height: 200px;\n  width: 100%;\n  border: 1px solid #333;\n  overflow: scroll;\n  position: fixed;\n  bottom: 0;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  font-family: \"Courier New\", Courier, monospace;\n}\n";
 		this.isDebug = true;
-		console.log("src/Main.hx:12:","Main");
+		console.log("src/Main.hx:15:","Main");
+		console.log("src/Main.hx:16:",this.file);
 		this.output("hi");
+		let _gthis = this;
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 0 + " in " + 0 + "ms");
+		},0);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 1 + " in " + 1000 + "ms");
+		},1000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 2 + " in " + 2000 + "ms");
+		},2000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 3 + " in " + 3000 + "ms");
+		},3000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 4 + " in " + 4000 + "ms");
+		},4000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 5 + " in " + 5000 + "ms");
+		},5000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 6 + " in " + 6000 + "ms");
+		},6000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 7 + " in " + 7000 + "ms");
+		},7000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 8 + " in " + 8000 + "ms");
+		},8000);
+		haxe_Timer.delay(function() {
+			_gthis.output("test " + 9 + " in " + 9000 + "ms");
+		},9000);
 	}
 	output(message) {
 		if(!this.isDebug) {
@@ -15,7 +48,7 @@ class Main {
 		if(window.document.getElementById(_id) == null) {
 			div = window.document.createElement("div");
 			div.id = _id;
-			div.style = "padding: 10px; height: 200px; width: 100%; border: 1px solid #333; overflow:scroll;position: fixed;bottom: 0; color: white; background-color: rgba(0,0,0,0.5);";
+			div.setAttribute("style","font-family: 'Courier New', Courier, monospace;padding: 10px; height: 200px; width: 100%; border: 1px solid #333; overflow:scroll;position: fixed;bottom: 0; color: white; background-color: rgba(0,0,0,0.5)");
 			window.document.body.appendChild(div);
 		}
 		let d = new Date();
@@ -25,6 +58,31 @@ class Main {
 	}
 	static main() {
 		let app = new Main();
+	}
+}
+class haxe_Timer {
+	constructor(time_ms) {
+		let me = this;
+		this.id = setInterval(function() {
+			me.run();
+		},time_ms);
+	}
+	stop() {
+		if(this.id == null) {
+			return;
+		}
+		clearInterval(this.id);
+		this.id = null;
+	}
+	run() {
+	}
+	static delay(f,time_ms) {
+		let t = new haxe_Timer(time_ms);
+		t.run = function() {
+			t.stop();
+			f();
+		};
+		return t;
 	}
 }
 class haxe_iterators_ArrayIterator {

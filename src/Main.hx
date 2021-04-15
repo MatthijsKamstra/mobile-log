@@ -1,5 +1,6 @@
 package;
 
+import haxe.Json;
 import js.Browser.*;
 
 using StringTools;
@@ -8,9 +9,18 @@ using Lambda;
 class Main {
 	var isDebug = true;
 
+	var file = CompileTime.readFile("style.css");
+
 	public function new() {
 		trace('Main');
+		trace(file);
+
 		output('hi');
+		for (i in 0...10) {
+			haxe.Timer.delay(() -> {
+				output('test ${i} in ${i * 1000}ms');
+			}, i * 1000);
+		}
 	}
 
 	/**
@@ -28,7 +38,8 @@ class Main {
 		if (document.getElementById(_id) == null) {
 			div = document.createDivElement();
 			div.id = _id;
-			untyped div.style = "padding: 10px; height: 200px; width: 100%; border: 1px solid #333; overflow:scroll;position: fixed;bottom: 0; color: white; background-color: rgba(0,0,0,0.5);";
+			div.setAttribute('style',
+				"font-family: 'Courier New', Courier, monospace;padding: 10px; height: 200px; width: 100%; border: 1px solid #333; overflow:scroll;position: fixed;bottom: 0; color: white; background-color: rgba(0,0,0,0.5)");
 			document.body.appendChild(div);
 		}
 
