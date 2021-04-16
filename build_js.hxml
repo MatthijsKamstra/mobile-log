@@ -7,7 +7,12 @@
 # -D source-map-content
 # -debug
 
+--each
+
+-main MonkeeBugger
+-js docs/monkee_bugger.js
+
+--next
 
 -main Main
--js docs/mobile_log.js
-
+-js docs/test.js
