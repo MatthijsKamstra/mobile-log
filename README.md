@@ -9,6 +9,7 @@ This is a better version
 ## source
 
 ```html
+<!-- embed monkee bugger and you are good to go -->
 <script src="https://raw.githubusercontent.com/MatthijsKamstra/monkee-bugger/master/docs/monkee_bugger.min.js"></script>
 ```
 
