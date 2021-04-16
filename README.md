@@ -10,7 +10,7 @@ This is a better version
 
 ```html
 <!-- embed monkee bugger and you are good to go -->
-<script src="https://raw.githubusercontent.com/MatthijsKamstra/monkee-bugger/master/docs/monkee_bugger.min.js"></script>
+<script src="https://matthijskamstra.github.io/monkee-bugger/monkee_bugger.min.js"></script>
 ```
 
 ## screenshot
