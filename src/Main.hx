@@ -26,6 +26,14 @@ class Main {
 		console.warn('warn');
 		console.error('error');
 		console.info('info');
+
+		console.log('deel 1/2', 'deel 2/2');
+		console.log('part 1/3', 'part 2/3', 'part 3/3');
+
+		var obj = {prop1: 'prop1Value', prop2: 'prop2Value', child: {childProp1: 'childProp1Value'}}
+		console.log(obj);
+
+		trace('trace');
 	}
 
 	static public function main() {

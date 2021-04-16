@@ -4,7 +4,7 @@ class Main {
 	constructor() {
 		this.DEBUG = true;
 		if(this.DEBUG) {
-			$global.console.log("[monkee]" + " - MonkeeBugger - " + "2021-04-16 15:30:30");
+			$global.console.log("[monkee]" + " - MonkeeBugger - " + "2021-04-16 20:18:40");
 		}
 		haxe_Timer.delay(function() {
 			$global.console.log("test " + 0 + " in " + 0 + "ms");
@@ -40,6 +40,11 @@ class Main {
 		$global.console.warn("warn");
 		$global.console.error("error");
 		$global.console.info("info");
+		$global.console.log("deel 1/2","deel 2/2");
+		$global.console.log("part 1/3","part 2/3","part 3/3");
+		let obj = { prop1 : "prop1Value", prop2 : "prop2Value", child : { childProp1 : "childProp1Value"}};
+		$global.console.log(obj);
+		console.log("src/Main.hx:36:","trace");
 	}
 	static main() {
 		window.document.addEventListener("DOMContentLoaded",function(event) {

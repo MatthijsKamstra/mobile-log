@@ -1,5 +1,6 @@
 package;
 
+import haxe.extern.Rest;
 import js.Syntax;
 import js.html.Element;
 import haxe.Json;
@@ -34,19 +35,24 @@ class MonkeeBugger {
 		var _warn = console.warn;
 		var _info = console.info;
 		var _error = console.error;
-		untyped console.log = function(msg:String) {
-			_log(msg); // maintains existing logging via the console.
-			output('${msg}');
+
+		// console.log('1', '2');
+
+		untyped console.log = function(msg:haxe.extern.Rest<Dynamic>, msg2:haxe.extern.Rest<Dynamic>) {
+			_log(msg, msg2); // maintains existing logging via the console.
+			output('${msg} ${msg2}');
+			// _log(__a); // maintains existing logging via the console.
+			// output('${__a}');
 		}
-		untyped console.warn = function(msg:String) {
+		untyped console.warn = function(msg:haxe.extern.Rest<Dynamic>) {
 			_warn(msg); // maintains existing logging via the console.
 			output('${msg}', 'warn');
 		}
-		untyped console.error = function(msg:String) {
+		untyped console.error = function(msg:haxe.extern.Rest<Dynamic>) {
 			_error(msg); // maintains existing logging via the console.
 			output('${msg}', 'error');
 		}
-		untyped console.info = function(msg:String) {
+		untyped console.info = function(msg:haxe.extern.Rest<Dynamic>) {
 			_info(msg); // maintains existing logging via the console.
 			output('${msg}', 'info');
 		}
