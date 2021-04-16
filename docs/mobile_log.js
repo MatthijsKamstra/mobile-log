@@ -2,12 +2,15 @@
 (function ($global) { "use strict";
 class Main {
 	constructor() {
-		this.file = ".red {\n  padding: 10px;\n  height: 200px;\n  width: 100%;\n  border: 1px solid #333;\n  overflow: scroll;\n  position: fixed;\n  bottom: 0;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  font-family: \"Courier New\", Courier, monospace;\n}\n";
-		this.isDebug = true;
-		console.log("src/Main.hx:15:","Main");
-		console.log("src/Main.hx:16:",this.file);
-		this.output("hi");
+		this.DEBUG = true;
 		let _gthis = this;
+		window.document.addEventListener("DOMContentLoaded",function(event) {
+			if(_gthis.DEBUG) {
+				console.log("src/Main.hx:23:","x");
+			}
+			return _gthis.init();
+		});
+		this.output("hi");
 		haxe_Timer.delay(function() {
 			_gthis.output("test " + 0 + " in " + 0 + "ms");
 		},0);
@@ -38,11 +41,27 @@ class Main {
 		haxe_Timer.delay(function() {
 			_gthis.output("test " + 9 + " in " + 9000 + "ms");
 		},9000);
+		this.highjack();
+		$global.console.log("log");
+		$global.console.warn("warn");
+		$global.console.error("error");
+		$global.console.info("info");
 	}
-	output(message) {
-		if(!this.isDebug) {
-			return;
-		}
+	highjack() {
+		var old = console.log;
+		var logger = document.getElementById('debugDiv');
+		console.log = function(message) {
+			if (typeof message == 'object') {
+				logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+			} else {
+				logger.innerHTML += message + '**<br />';
+
+				$bind(this,this.output)( message);
+
+			}
+		} ;
+	}
+	init() {
 		let _id = "debugDiv";
 		let div = window.document.getElementById(_id);
 		if(window.document.getElementById(_id) == null) {
@@ -51,6 +70,10 @@ class Main {
 			div.setAttribute("style","font-family: 'Courier New', Courier, monospace;padding: 10px; height: 200px; width: 100%; border: 1px solid #333; overflow:scroll;position: fixed;bottom: 0; color: white; background-color: rgba(0,0,0,0.5)");
 			window.document.body.appendChild(div);
 		}
+		return div;
+	}
+	output(message) {
+		let div = this.init();
 		let d = new Date();
 		let time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " - ";
 		let txt = div.innerText;
@@ -97,5 +120,8 @@ class haxe_iterators_ArrayIterator {
 		return this.array[this.current++];
 	}
 }
+var $_;
+function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
+$global.$haxeUID |= 0;
 Main.main();
-})({});
+})(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
