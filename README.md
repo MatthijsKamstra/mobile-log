@@ -4,6 +4,8 @@ I needed a logger for mobile, made the first version a year ago.
 
 This is a better version
 
+![](icon.png)
+
 ## source
 
 ```html
